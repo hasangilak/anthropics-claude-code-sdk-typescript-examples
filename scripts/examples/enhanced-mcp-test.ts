@@ -1,5 +1,61 @@
 #!/usr/bin/env bun
 
+/**
+ * 🔌 ENHANCED MCP TEST - Model Context Protocol Security Testing
+ * 
+ * This script provides comprehensive testing and security analysis for MCP
+ * (Model Context Protocol) server integrations. It demonstrates how to safely
+ * test external MCP tools with detailed security warnings and risk assessment.
+ * 
+ * 🎯 FUNCTIONALITY:
+ * - Comprehensive MCP server testing with security analysis
+ * - Detailed parameter inspection and risk assessment
+ * - Server-specific security warnings (filesystem, git, database)
+ * - Interactive permission system for external tools
+ * - MCP tool discovery and capability testing
+ * 
+ * 🔧 MCP SERVERS TESTED:
+ * ✅ Filesystem Server - File operations with security warnings
+ * ✅ SQLite Server - Database operations with data protection alerts
+ * ✅ Git Server - Repository operations with modification warnings
+ * ✅ Custom MCP servers - Generic external tool analysis
+ * 
+ * 🧪 HOW TO TEST:
+ * Prerequisites:
+ * 1. Install MCP servers: `npm install -g @modelcontextprotocol/server-*`
+ * 2. Run: `bun run enhanced-mcp-test.ts`
+ * 3. Review detailed security warnings for each MCP tool
+ * 4. Choose carefully whether to allow external tool access
+ * 5. Monitor MCP server behavior and tool usage
+ * 
+ * 📋 SECURITY FEATURES:
+ * - HIGH RISK warnings for all MCP tools
+ * - Parameter analysis with security implications
+ * - Data exposure and privacy considerations
+ * - Server source verification reminders
+ * - External network access warnings
+ * 
+ * ⚠️  SECURITY WARNINGS:
+ * - MCP tools run with your system permissions
+ * - External tools may access file system and network
+ * - Data may be transmitted to third-party servers
+ * - Tool capabilities may not be fully documented
+ * - Always verify MCP server source and trustworthiness
+ * 
+ * 💡 WHEN TO USE:
+ * - Testing new MCP server integrations safely
+ * - Understanding MCP security implications
+ * - Validating external tool permissions
+ * - Learning about MCP capabilities and risks
+ * - Debugging MCP server connection issues
+ * 
+ * 🔗 MCP RESOURCES:
+ * - Install: npm install -g @modelcontextprotocol/server-*
+ * - Configure: claude mcp add <server-name> <command>
+ * - Documentation: https://modelcontextprotocol.io
+ * - Security: Always review server source code
+ */
+
 import { query, type SDKMessage, type SDKUserMessage, type PermissionResult } from "@anthropic-ai/claude-code";
 import { createInterface } from 'readline';
 

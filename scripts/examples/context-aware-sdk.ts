@@ -1,5 +1,67 @@
 #!/usr/bin/env bun
 
+/**
+ * 🧠 CONTEXT-AWARE SDK - Session Management & Memory Demo
+ * 
+ * This script demonstrates advanced context preservation and session management
+ * with the Claude Code SDK. It shows how to maintain conversation continuity
+ * across multiple interactions and properly manage session state.
+ * 
+ * 🎯 FUNCTIONALITY:
+ * - Automatic session detection and loading from previous runs
+ * - Interactive context strategy selection (continue/resume/new)
+ * - Session persistence with cost tracking and conversation summaries
+ * - Integration with enhanced permission system
+ * - Conversation memory across multiple SDK calls
+ * 
+ * 🔧 KEY FEATURES:
+ * ✅ Session persistence (.claude-session-context.json)
+ * ✅ Context continuation using SDK continue/resume options
+ * ✅ Cost accumulation across sessions
+ * ✅ Conversation summaries and metadata
+ * ✅ Interactive context strategy selection
+ * ✅ Enhanced permission system integration
+ * 
+ * 🧪 HOW TO TEST:
+ * 1. Run: `bun run context-aware-sdk.ts`
+ * 2. Choose "new" for first run to start fresh
+ * 3. Complete the interaction (e.g., create a file)
+ * 4. Run script again - should detect previous session
+ * 5. Choose "continue" to maintain conversation context
+ * 6. Verify Claude remembers previous interactions
+ * 
+ * 📋 CONTEXT STRATEGIES:
+ * - "new": Start completely fresh session (ignores history)
+ * - "continue": Continue from most recent conversation
+ * - "resume": Resume specific session ID
+ * - "auto": Automatically prompt user to choose
+ * 
+ * 📊 SESSION DATA TRACKED:
+ * - Session ID for SDK continuation
+ * - Last interaction timestamp
+ * - Total message count across sessions
+ * - Accumulated cost tracking
+ * - Conversation summaries for context
+ * 
+ * ⚠️  TROUBLESHOOTING:
+ * - Session not loading: Check .claude-session-context.json exists
+ * - Context not preserved: Verify continue/resume options work
+ * - Cost not accumulating: Check session save functionality
+ * - Permission errors: EnhancedPermissionSystem dependency needed
+ * 
+ * 💡 WHEN TO USE:
+ * - Multi-step workflows requiring memory
+ * - Building conversational applications
+ * - Cost optimization through context reuse
+ * - Testing session management features
+ * - Understanding SDK continue/resume options
+ * 
+ * 🔗 RELATED FILES:
+ * - enhanced-permission-system.ts (dependency)
+ * - .claude-session-context.json (created automatically)
+ * - Uses SDK options: continue, resume
+ */
+
 import { query, type SDKMessage, type SDKUserMessage, type PermissionResult } from "@anthropic-ai/claude-code";
 import { EnhancedPermissionSystem } from "./enhanced-permission-system";
 import { createInterface } from 'readline';

@@ -1,3 +1,0 @@
-This is a test file to trigger the PreToolUse hook.
-Created on 2025-08-07.
-This file contains sample content for testing purposes.

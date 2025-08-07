@@ -1,5 +1,50 @@
 #!/usr/bin/env bun
 
+/**
+ * 📁 CLAUDE FILE CREATOR - Basic Permission System Demo
+ * 
+ * This script demonstrates the fundamental Claude Code SDK integration with
+ * interactive permission callbacks. It shows how to properly handle tool
+ * permission requests and stream responses.
+ * 
+ * 🎯 FUNCTIONALITY:
+ * - Interactive permission prompts for tool usage
+ * - Stream-based input to prevent callback hanging (fixes GitHub issue #4775)
+ * - Basic file creation workflow with user approval
+ * - Proper session management with promise-based stream handling
+ * 
+ * 🔧 FEATURES DEMONSTRATED:
+ * ✅ canUseTool callback implementation
+ * ✅ Stream JSON communication with Claude Code
+ * ✅ Permission result handling (allow/deny)
+ * ✅ Async generator for input streaming
+ * ✅ Conversation completion management
+ * 
+ * 🧪 HOW TO TEST:
+ * 1. Run: `bun run claude-file-creator.ts`
+ * 2. Wait for tool permission prompt
+ * 3. Choose 'y' to allow or 'n' to deny file creation
+ * 4. Observe file creation and session completion
+ * 5. Check created files in directory
+ * 
+ * 📋 EXPECTED BEHAVIOR:
+ * - Should prompt for Write tool permission
+ * - If allowed, creates "example-output.txt" file
+ * - Displays streaming JSON responses from Claude
+ * - Shows conversation cost and duration
+ * - Properly closes stream after completion
+ * 
+ * ⚠️  TROUBLESHOOTING:
+ * - If callback hangs, check stream completion promise
+ * - Ensure conversationDone() is called in result handling
+ * - Verify AsyncIterable implementation for input stream
+ * 
+ * 🔗 RELATED:
+ * - Based on fix for https://github.com/anthropics/claude-code/issues/4775
+ * - Uses SDK options: maxTurns, canUseTool callback
+ * - Implements stream-json input format requirement
+ */
+
 import { query, type SDKMessage, type SDKUserMessage, type PermissionResult } from "@anthropic-ai/claude-code";
 import { createInterface } from 'readline';
 

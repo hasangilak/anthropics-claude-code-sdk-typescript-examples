@@ -1,5 +1,74 @@
 #!/usr/bin/env bun
 
+/**
+ * 🛡️ ENHANCED PERMISSION SYSTEM - Advanced Security & User Control
+ * 
+ * This is a comprehensive permission system that provides detailed security
+ * analysis, risk assessment, and user-friendly controls for Claude Code tool
+ * usage. It replaces basic permission prompts with intelligent decision support.
+ * 
+ * 🎯 FUNCTIONALITY:
+ * - Detailed risk analysis for every tool request (LOW/MEDIUM/HIGH/CRITICAL)
+ * - File content previews with security scanning
+ * - Interactive permission controls with multiple options
+ * - Tool usage statistics and pattern tracking
+ * - Smart security warnings for dangerous operations
+ * 
+ * 🔧 KEY FEATURES:
+ * ✅ 4-level risk assessment system
+ * ✅ File content preview with security scanning
+ * ✅ Parameter analysis and impact assessment
+ * ✅ Smart recommendations based on operation type
+ * ✅ Usage statistics and tool tracking
+ * ✅ Batch permission controls (allow all, deny specific tools)
+ * 
+ * 🧪 HOW TO TEST:
+ * This is a utility class - test it through other scripts:
+ * 1. Run enhanced-comprehensive-test.ts
+ * 2. Run enhanced-demo.ts
+ * 3. Run ultimate-claude-sdk.ts
+ * 4. Observe detailed permission prompts with risk analysis
+ * 5. Try different permission responses (y/n/a/d/i/s)
+ * 
+ * 📋 PERMISSION OPTIONS:
+ * - "y": Allow this specific tool once
+ * - "n": Deny this specific tool once
+ * - "a": Allow ALL future tools automatically
+ * - "d": Deny ALL future requests for this tool type
+ * - "i": Show additional security information
+ * - "s": Show detailed usage statistics
+ * 
+ * 🛡️ SECURITY FEATURES:
+ * - Detects system file access (CRITICAL risk)
+ * - Scans file content for passwords, keys, tokens
+ * - Warns about dangerous bash commands
+ * - Identifies network operations
+ * - Flags configuration file modifications
+ * - MCP tool security analysis
+ * 
+ * ⚠️  TROUBLESHOOTING:
+ * - Import errors: Ensure this file is in same directory as caller
+ * - Missing readline: Check Node.js/Bun installation
+ * - File access errors: Verify file system permissions
+ * 
+ * 💡 WHEN TO USE:
+ * - Any script requiring intelligent permission handling
+ * - Production applications needing security controls
+ * - Educational tools demonstrating security best practices
+ * - Applications requiring audit trails of tool usage
+ * 
+ * 🔗 USED BY:
+ * - enhanced-comprehensive-test.ts
+ * - enhanced-demo.ts  
+ * - context-aware-sdk.ts
+ * - ultimate-claude-sdk.ts
+ * 
+ * 📊 EXPORT:
+ * - EnhancedPermissionSystem class
+ * - Use: const permissions = new EnhancedPermissionSystem()
+ * - Call: await permissions.getUserPermission(toolName, parameters)
+ */
+
 import { type PermissionResult } from "@anthropic-ai/claude-code";
 import { createInterface } from 'readline';
 import * as path from 'path';

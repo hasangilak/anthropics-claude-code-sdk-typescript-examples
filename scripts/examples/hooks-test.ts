@@ -1,5 +1,57 @@
 #!/usr/bin/env bun
 
+/**
+ * 🎵 HOOKS TEST - Claude Code Automation & Events Demo
+ * 
+ * This script demonstrates and tests the Claude Code hooks system, which
+ * allows automatic execution of shell commands in response to various
+ * events during Claude Code operation (like completion sounds).
+ * 
+ * 🎯 FUNCTIONALITY:
+ * - Tests various Claude Code hook events
+ * - Demonstrates completion sound integration
+ * - Validates hook execution with different triggers
+ * - Shows how to configure hooks in settings.local.json
+ * 
+ * 🔧 HOOK EVENTS TESTED:
+ * ✅ Stop - Executes when Claude finishes responding (completion sound)
+ * ✅ UserPromptSubmit - Executes when user submits a prompt
+ * ✅ PreToolUse - Executes before tool usage (logging)
+ * ✅ PostToolUse - Executes after successful tool completion
+ * 
+ * 🧪 HOW TO TEST:
+ * 1. Ensure done.mp3 exists in project directory
+ * 2. Verify .claude/settings.local.json has hooks configured
+ * 3. Run: `bun run hooks-test.ts`
+ * 4. Listen for completion sounds after each test
+ * 5. Check /tmp/claude-hook-test.log for hook execution logs
+ * 
+ * 📋 EXPECTED BEHAVIOR:
+ * - Completion sound plays after each successful response
+ * - Log entries created for hook executions
+ * - Different hook events trigger at appropriate times
+ * - Visual confirmation of hook execution in output
+ * 
+ * ⚠️  TROUBLESHOOTING:
+ * - No sound: Check done.mp3 exists and ffplay is installed
+ * - No logs: Check hook commands have proper file permissions
+ * - Hook errors: Review .claude/settings.local.json syntax
+ * - Command not found: Verify hook command paths are correct
+ * 
+ * 💡 WHEN TO USE:
+ * - Testing hook configuration and execution
+ * - Verifying completion sounds work correctly
+ * - Understanding hook event timing
+ * - Debugging hook automation issues
+ * - Learning Claude Code automation features
+ * 
+ * 🔗 CONFIGURATION:
+ * - Hooks configured in .claude/settings.local.json
+ * - Uses ffplay for audio playback
+ * - Creates logs in /tmp/claude-hook-test.log
+ * - Stop hook requires done.mp3 file
+ */
+
 import { query, type SDKMessage, type SDKUserMessage, type PermissionResult } from "@anthropic-ai/claude-code";
 import { createInterface } from 'readline';
 
