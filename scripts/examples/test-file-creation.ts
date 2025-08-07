@@ -1,5 +1,78 @@
 #!/usr/bin/env bun
 
+#!/usr/bin/env bun
+
+/**
+ * 📝 TEST FILE CREATION - Direct File Operations with Permissions
+ * 
+ * This script tests direct file creation using the Claude Code SDK with
+ * focused file operation validation. It demonstrates permission handling
+ * for Write tool usage with clear, straightforward file creation workflow.
+ * 
+ * 🎯 FUNCTIONALITY:
+ * - Direct file creation using Write tool with permission callbacks
+ * - Focused file operation testing and validation
+ * - Interactive permission system for Write tool specifically
+ * - Process management with graceful shutdown handling
+ * - Success/failure validation for file creation operations
+ * 
+ * 🔧 KEY FEATURES:
+ * ✅ Write tool permission callback implementation
+ * ✅ Direct file creation with specified content
+ * ✅ Interactive permission prompts with user control
+ * ✅ Process signal handling (SIGINT) for graceful shutdown
+ * ✅ Stream-based input format for SDK compatibility
+ * ✅ Clear success/failure reporting and validation
+ * 
+ * 🧪 HOW TO TEST:
+ * 1. Run: `bun run test-file-creation.ts`
+ * 2. Review the file creation request and parameters
+ * 3. Choose 'y' to allow Write tool or 'n' to deny
+ * 4. If allowed, verify "test-output.txt" is created
+ * 5. Check file content matches expected message
+ * 6. Review completion status and duration
+ * 
+ * 📋 TEST WORKFLOW:
+ * 1. Initialize SDK with Write tool permission callback
+ * 2. Send direct file creation request to Claude
+ * 3. Handle permission prompt for Write tool usage
+ * 4. Execute file creation with user-approved parameters
+ * 5. Validate successful file creation and content
+ * 6. Report completion status and operation details
+ * 
+ * 📊 EXPECTED BEHAVIOR:
+ * - Prompts for Write tool permission with file details
+ * - Creates "test-output.txt" with success message if allowed
+ * - Shows detailed operation parameters before execution
+ * - Completes in 10-30 seconds depending on user response
+ * - Reports success/failure with cost and timing information
+ * - File content: "Success! File created via Claude Code SDK..."
+ * 
+ * ⚠️  TROUBLESHOOTING:
+ * - Permission denied: Check if Write tool was approved
+ * - File not created: Verify directory write permissions
+ * - Process hangs: Ensure permission callback completes properly
+ * - Stream errors: Check async generator implementation
+ * - SIGINT handling: Test graceful shutdown with Ctrl+C
+ * 
+ * 💡 WHEN TO USE:
+ * - Testing basic file creation capabilities
+ * - Learning Write tool permission handling
+ * - Validating file operation workflows
+ * - Understanding direct tool usage patterns
+ * - Template for file-focused SDK integrations
+ * 
+ * 🔍 COMPARED TO OTHER SCRIPTS:
+ * - More focused than comprehensive-tools-test.ts
+ * - Simpler than claude-file-creator.ts (less documentation)
+ * - Direct approach without enhanced permission analysis
+ * - Good baseline for understanding basic Write tool usage
+ * 
+ * 📁 CREATES:
+ * - test-output.txt (if Write tool is approved)
+ * - Contains success message with SDK integration confirmation
+ */
+
 import { query, type SDKMessage, type SDKUserMessage, type PermissionResult } from "@anthropic-ai/claude-code";
 import { createInterface } from 'readline';
 

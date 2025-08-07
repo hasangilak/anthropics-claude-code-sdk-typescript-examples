@@ -1,5 +1,75 @@
 #!/usr/bin/env bun
 
+/**
+ * ⚡ QUICK DEMO - Fast Claude Code SDK Demonstration
+ * 
+ * This script provides a fast, streamlined demonstration of Claude Code SDK
+ * capabilities with minimal setup and auto-permission features. Perfect for
+ * quick showcases and initial SDK validation.
+ * 
+ * 🎯 FUNCTIONALITY:
+ * - Quick SDK integration demo with minimal user interaction
+ * - Auto-permission system for streamlined execution
+ * - Basic tool demonstration with file operations
+ * - Hooks integration with completion sound effects
+ * - Fast execution under 2 minutes
+ * 
+ * 🔧 FEATURES DEMONSTRATED:
+ * ✅ Write tool - Quick file creation with auto-permissions
+ * ✅ Hooks system - Completion sound integration
+ * ✅ Stream-based SDK communication
+ * ✅ Auto-allow permission handling for smooth demo flow
+ * ✅ Process management and graceful shutdown
+ * ✅ Basic error handling and reporting
+ * 
+ * 🧪 HOW TO TEST:
+ * 1. Ensure done.mp3 exists for completion sound
+ * 2. Run: `bun run quick-demo.ts`
+ * 3. Type "a" when prompted to auto-allow all tools
+ * 4. Watch fast execution of file creation demo
+ * 5. Listen for completion sound when finished
+ * 6. Check created "quick-demo-output.txt" file
+ * 
+ * 📋 DEMO WORKFLOW:
+ * 1. Initialize SDK with auto-permission capability
+ * 2. Send quick file creation request to Claude
+ * 3. Auto-approve Write tool (if user selects "a")
+ * 4. Create demo output file with success message
+ * 5. Play completion sound via hooks integration
+ * 6. Report successful completion
+ * 
+ * 📊 EXPECTED BEHAVIOR:
+ * - Completes in 30-60 seconds with auto-permissions
+ * - Creates "quick-demo-output.txt" with demo content
+ * - Plays completion sound when finished
+ * - Shows minimal but clear progress output
+ * - Total cost typically under $0.05
+ * - Perfect for quick capability demonstrations
+ * 
+ * ⚠️  TROUBLESHOOTING:
+ * - No completion sound: Check done.mp3 exists and ffplay installed
+ * - File not created: Verify directory write permissions
+ * - Permission prompts: Use "a" to auto-allow all tools
+ * - Hook errors: Check .claude/settings.local.json configuration
+ * 
+ * 💡 WHEN TO USE:
+ * - Quick SDK capability demonstration
+ * - Initial SDK installation validation
+ * - Fast showcase for new users
+ * - Template for minimal SDK integration
+ * - Testing basic hooks and permission systems
+ * 
+ * 🎵 HOOKS INTEGRATION:
+ * - Requires completion sound file (done.mp3)
+ * - Uses Stop hook for audio feedback
+ * - Demonstrates automation potential
+ * 
+ * 🔗 DEPENDENCIES:
+ * - done.mp3 file in project root (for completion sound)
+ * - .claude/settings.local.json with hooks configured
+ * - No external dependencies or complex setup required
+ */
+
 import { query, type SDKMessage, type SDKUserMessage, type PermissionResult } from "@anthropic-ai/claude-code";
 import { createInterface } from 'readline';
 

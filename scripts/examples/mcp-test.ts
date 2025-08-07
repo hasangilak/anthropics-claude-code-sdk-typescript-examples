@@ -1,5 +1,84 @@
 #!/usr/bin/env bun
 
+#!/usr/bin/env bun
+
+/**
+ * 🔌 MCP INTEGRATION TEST - Model Context Protocol Server Testing
+ * 
+ * This script tests integration with MCP (Model Context Protocol) servers,
+ * which extend Claude Code with external tool capabilities. It validates
+ * server connections, tool discovery, and external tool execution.
+ * 
+ * 🎯 FUNCTIONALITY:
+ * - MCP server connection and initialization testing
+ * - External tool discovery and capability enumeration
+ * - Tool execution with permission management
+ * - Server configuration validation and testing
+ * - Multi-server testing with different protocols
+ * 
+ * 🔧 MCP SERVERS TESTED:
+ * ✅ Filesystem Server - File system operations in specified directories
+ * ✅ SQLite Server - Database operations and query execution
+ * ✅ Git Server - Repository operations and version control
+ * ✅ Custom servers - Any additional MCP server configurations
+ * 
+ * 🧪 HOW TO TEST:
+ * Prerequisites:
+ * 1. Install MCP servers: `npm install -g @modelcontextprotocol/server-*`
+ * 2. Run: `bun run mcp-test.ts`
+ * 3. Allow or deny MCP tools based on your security preferences
+ * 4. Review tool discovery and execution results
+ * 5. Check final summary of MCP server capabilities
+ * 
+ * 📋 TEST SCENARIOS:
+ * 1. Server Connection - Validate MCP server startup and communication
+ * 2. Tool Discovery - Enumerate available tools from each server
+ * 3. Basic Tool Execution - Test fundamental operations safely
+ * 4. Error Handling - Validate graceful handling of server issues
+ * 5. Multi-server Coordination - Test multiple MCP servers simultaneously
+ * 
+ * 📊 EXPECTED BEHAVIOR:
+ * - Successfully connects to installed MCP servers
+ * - Discovers and lists available external tools
+ * - Executes basic operations with permission prompts
+ * - Shows server configuration and communication details
+ * - Provides summary of server capabilities and tool counts
+ * - Runtime: 3-5 minutes with user interaction
+ * 
+ * ⚠️  TROUBLESHOOTING:
+ * - Server not found: Install with `npm install -g @modelcontextprotocol/server-*`
+ * - Connection failures: Check server configuration and permissions
+ * - Tool execution errors: Review server-specific requirements
+ * - Permission timeouts: MCP tools may require external access approval
+ * - Configuration issues: Verify server command paths and arguments
+ * 
+ * 💡 WHEN TO USE:
+ * - Testing MCP server integrations and external tool access
+ * - Validating external tool discovery and execution
+ * - Understanding MCP protocol capabilities and limitations
+ * - Debugging MCP server connection and communication issues
+ * - Learning about external tool integration patterns
+ * 
+ * 🔒 SECURITY CONSIDERATIONS:
+ * - MCP tools run with your system permissions
+ * - External servers may access file system and network
+ * - Tools may modify external services or data
+ * - Always review server source and trustworthiness
+ * - Consider data exposure when using external tools
+ * 
+ * 📦 INSTALLATION:
+ * Install common MCP servers:
+ * - `npm install -g @modelcontextprotocol/server-filesystem`
+ * - `npm install -g @modelcontextprotocol/server-sqlite` 
+ * - `npm install -g @modelcontextprotocol/server-git`
+ * 
+ * 🔗 MCP PROTOCOL:
+ * - Model Context Protocol enables external tool integration
+ * - Servers run as separate processes with stdio communication
+ * - Tools are discovered dynamically from server capabilities
+ * - Documentation: https://modelcontextprotocol.io
+ */
+
 import { query, type SDKMessage, type SDKUserMessage, type PermissionResult } from "@anthropic-ai/claude-code";
 import { createInterface } from 'readline';
 

@@ -1,5 +1,69 @@
 #!/usr/bin/env bun
 
+#!/usr/bin/env bun
+
+/**
+ * 🔄 CONTEXT-PRESERVING TEST - Session Continuity & Memory Validation
+ * 
+ * This script tests Claude Code SDK's context preservation capabilities across
+ * multiple conversations. It demonstrates session management, memory retention,
+ * and the ability to build upon previous interactions through continue/resume.
+ * 
+ * 🎯 FUNCTIONALITY:
+ * - Multi-step context preservation testing
+ * - Session continuity validation across separate queries
+ * - Enhanced permission system integration
+ * - Cost tracking and session data persistence
+ * - Interactive context continuation prompts
+ * 
+ * 🔧 KEY FEATURES:
+ * ✅ Context-aware test execution with session tracking
+ * ✅ Interactive continuation prompts between tests
+ * ✅ Session data persistence to .claude-test-sessions.json
+ * ✅ Enhanced permission system integration
+ * ✅ Multi-step workflow testing with memory validation
+ * ✅ Cost analysis across connected sessions
+ * 
+ * 🧪 HOW TO TEST:
+ * 1. Run: `bun run context-preserving-test.ts`
+ * 2. Complete first test (creates initial context)
+ * 3. Choose 'y' when prompted to continue context
+ * 4. Verify Claude remembers previous interactions
+ * 5. Check session data saved to .claude-test-sessions.json
+ * 6. Observe context preservation across all test phases
+ * 
+ * 📋 TEST SCENARIOS:
+ * 1. Context Setup - Create initial context and files
+ * 2. Memory Test - Verify Claude remembers previous work
+ * 3. Multi-step Workflow - Complex operations building on context
+ * 4. Context Validation - Verify all context has been preserved
+ * 
+ * 📊 EXPECTED BEHAVIOR:
+ * - Claude remembers user name (Hassan) across sessions
+ * - Previously created files are recognized and referenced
+ * - Context builds progressively through each test phase
+ * - Session data is saved with cost and usage tracking
+ * - Enhanced permission prompts for all tool usage
+ * 
+ * ⚠️  TROUBLESHOOTING:
+ * - Context not preserved: Check SDK continue/resume options
+ * - Session save errors: Verify file write permissions
+ * - Memory issues: Ensure session IDs are consistent
+ * - Enhanced permission dependency: Verify enhanced-permission-system.ts exists
+ * 
+ * 💡 WHEN TO USE:
+ * - Testing context preservation functionality
+ * - Validating session management features
+ * - Understanding memory retention across SDK calls
+ * - Demonstrating progressive conversation building
+ * - Learning advanced SDK context features
+ * 
+ * 🔗 DEPENDENCIES:
+ * - enhanced-permission-system.ts (for permission handling)
+ * - Creates .claude-test-sessions.json for session persistence
+ * - Uses SDK options: continue, resume for context preservation
+ */
+
 import { query, type SDKMessage, type SDKUserMessage, type PermissionResult } from "@anthropic-ai/claude-code";
 import { EnhancedPermissionSystem } from "./enhanced-permission-system";
 import { createInterface } from 'readline';

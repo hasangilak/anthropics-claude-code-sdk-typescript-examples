@@ -1,5 +1,78 @@
 #!/usr/bin/env bun
 
+#!/usr/bin/env bun
+
+/**
+ * 🎯 MASTER TEST RUNNER - Orchestrated SDK Testing Suite
+ * 
+ * This script provides orchestrated execution of multiple Claude Code SDK test
+ * suites with centralized reporting and management. It runs comprehensive tests
+ * in sequence with user control and detailed result tracking.
+ * 
+ * 🎯 FUNCTIONALITY:
+ * - Orchestrated execution of multiple test suites
+ * - Interactive test selection and execution control
+ * - Centralized result tracking and comprehensive reporting
+ * - Process management with proper error handling
+ * - Time tracking and performance analysis across test suites
+ * 
+ * 🔧 TEST SUITES MANAGED:
+ * ✅ Comprehensive Tools Test - Core tool functionality validation
+ * ✅ MCP Integration Test - External MCP server testing
+ * ✅ Hooks Functionality Test - Automation and event system testing
+ * ✅ Additional suites can be easily added to the configuration
+ * 
+ * 🧪 HOW TO TEST:
+ * 1. Run: `bun run master-test-runner.ts`
+ * 2. Review test suite descriptions and estimated times
+ * 3. Choose 'y' to start the full test sequence
+ * 4. For each suite, choose y/n/q (yes/no/quit)
+ * 5. Monitor execution progress and results
+ * 6. Review final comprehensive summary
+ * 
+ * 📋 EXECUTION FEATURES:
+ * - Interactive confirmation before each test suite
+ * - Real-time progress monitoring with stdio inheritance
+ * - Graceful error handling and process management
+ * - Detailed timing and success/failure tracking
+ * - Final summary with statistics and recommendations
+ * - User control to skip or quit at any point
+ * 
+ * 📊 EXPECTED BEHAVIOR:
+ * - Total execution time: 10-25 minutes (depending on interactions)
+ * - Successful completion of 2-3 test suites typically
+ * - Comprehensive final report with pass/fail statistics
+ * - Generated test files and logs from individual suites
+ * - Cost analysis aggregated across all tests
+ * 
+ * ⚠️  TROUBLESHOOTING:
+ * - Long execution: Individual tests may require user interaction
+ * - Process failures: Check individual test script dependencies
+ * - MCP test failures: MCP servers may not be installed
+ * - Hook test issues: Check audio file and configuration setup
+ * - Permission errors: Ensure proper file system access
+ * 
+ * 💡 WHEN TO USE:
+ * - Comprehensive validation of Claude Code SDK installation
+ * - Systematic testing after SDK updates or changes
+ * - Performance benchmarking across multiple test scenarios
+ * - Validation testing before production deployment
+ * - Learning about complete SDK test coverage
+ * 
+ * 🏛️ MANAGEMENT FEATURES:
+ * - Individual test suite configuration and metadata
+ * - Process lifecycle management with proper cleanup
+ * - Interactive execution control and decision points
+ * - Comprehensive result aggregation and analysis
+ * - Detailed logging and error reporting
+ * 
+ * 🔗 ORCHESTRATES:
+ * - comprehensive-tools-test.ts (core functionality)
+ * - mcp-test.ts (external integrations)
+ * - hooks-test.ts (automation features)
+ * - Results can inform decisions about individual component usage
+ */
+
 import { spawn } from 'child_process';
 import { createInterface } from 'readline';
 

@@ -1,5 +1,11 @@
 ---
 
+# Claude Code SDK Examples Project
+
+This project demonstrates comprehensive Claude Code SDK integration using TypeScript and Bun. It includes examples ranging from basic usage to enterprise-grade features with enhanced security, context preservation, and external integrations.
+
+## Development Standards
+
 Default to using Bun instead of Node.js.
 
 - Use `bun <file>` instead of `node <file>` or `ts-node <file>`
@@ -105,3 +111,65 @@ bun --hot ./index.ts
 ```
 
 For more information, read the Bun API docs in `node_modules/bun-types/docs/**.md`.
+
+## Claude Code SDK Integration
+
+This project demonstrates comprehensive Claude Code SDK integration with:
+
+### Key Components
+- **Examples Directory**: `scripts/examples/` - Complete collection of SDK examples
+- **Enhanced Permission System**: `enhanced-permission-system.ts` - Enterprise-grade security
+- **Context Management**: Session preservation and memory retention
+- **MCP Integration**: External tool server support
+- **Hooks System**: Automation and completion events
+
+### Quick Start
+```bash
+# Interactive examples browser
+bun run index.ts
+
+# Basic SDK test
+bun run scripts/examples/simple-claude-test.ts
+
+# Ultimate integration
+bun run scripts/examples/ultimate-claude-sdk.ts
+```
+
+### Security Features
+- 4-level risk assessment (LOW/MEDIUM/HIGH/CRITICAL)
+- Content security scanning for sensitive data
+- Parameter analysis with security implications
+- MCP tool safety analysis
+- Interactive permission controls
+
+### Testing Commands
+```bash
+# Run comprehensive tool testing
+bun run scripts/examples/comprehensive-tools-test.ts
+
+# Test with enhanced security
+bun run scripts/examples/enhanced-comprehensive-test.ts
+
+# Test context preservation
+bun run scripts/examples/context-preserving-test.ts
+
+# Test MCP integration (requires MCP servers)
+bun run scripts/examples/mcp-test.ts
+
+# Test hooks system (requires done.mp3)
+bun run scripts/examples/hooks-test.ts
+```
+
+### Configuration Files
+- `.claude/settings.local.json` - Hooks and automation configuration
+- Session files - Context preservation across interactions
+- Enhanced permission state - Security analysis persistence
+
+### Development Workflow
+1. Start with basic examples (`simple-claude-test.ts`)
+2. Learn permissions (`claude-file-creator.ts`)
+3. Explore advanced features (`comprehensive-tools-test.ts`)
+4. Test security features (`enhanced-comprehensive-test.ts`)
+5. Master the ultimate integration (`ultimate-claude-sdk.ts`)
+
+All examples include comprehensive documentation and follow enterprise security best practices.
