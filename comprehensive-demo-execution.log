@@ -25,7 +25,7 @@ This will test Write, Bash, LS, Grep, and multiple tool coordination with permis
 🔧 System initialized with tools and hooks
 📥 Claude Response:
 ---
-I'll demonstrate multiple Claude Code capabilities by creating a demo directory, JSON file, and performing various file operations. Let me start by creating a todo list to track this task.
+I'll demonstrate multiple Claude Code capabilities by completing your requested tasks. Let me create a todo list to track these tasks systematically.
 ---
 
 📥 Claude Response:
@@ -35,12 +35,7 @@ I'll demonstrate multiple Claude Code capabilities by creating a demo directory,
 
 📥 Claude Response:
 ---
-Now let me start with the first task - creating the demo directory:
----
-
-📥 Claude Response:
----
-🔧 Using tool: TodoWrite
+Now let me execute these tasks in parallel where possible:
 ---
 
 📥 Claude Response:
@@ -48,10 +43,15 @@ Now let me start with the first task - creating the demo directory:
 🔧 Using tool: Bash
 ---
 
+📥 Claude Response:
+---
+🔧 Using tool: LS
+---
+
 
 🔧 Tool Request: Bash
    Parameters: {
-  "command": "mkdir sdk-demo",
+  "command": "mkdir -p sdk-demo",
   "description": "Create sdk-demo directory"
 }
 
@@ -64,11 +64,6 @@ Now let me start with the first task - creating the demo directory:
 
 📥 Claude Response:
 ---
-Now creating a JSON file with sample data:
----
-
-📥 Claude Response:
----
 🔧 Using tool: Write
 ---
 
@@ -76,7 +71,7 @@ Now creating a JSON file with sample data:
 🔧 Tool Request: Write
    Parameters: {
   "file_path": "/home/hassan/anthropic-sdk/sdk-demo/sample-data.json",
-  "content": "{\n  \"users\": [\n    {\n      \"id\": 1,\n      \"name\": \"Alice Johnson\",\n      \"email\": \"alice@example.com\",\n      \"role\": \"admin\",\n      \"active\": true\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Bob Smith\",\n      \"email\": \"bob@example.com\",\n      \"role\": \"user\",\n      \"active\": true\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Charlie Brown\",\n      \"email\": \"charlie@example.com\",\n      \"role\": \"user\",\n      \"active\": false\n    }\n  ],\n  \"settings\": {\n    \"theme\": \"dark\",\n    \"notifications\": true,\n    \"maxUsers\": 100\n  },\n  \"version\": \"1.0.0\",\n  \"lastUpdated\": \"2025-08-07T10:30:00Z\"\n}"
+  "content": "{\n  \"demo\": {\n    \"title\": \"Claude Code SDK Demo\",\n    \"version\": \"1.0.0\",\n    \"capabilities\": [\n      \"file_operations\",\n      \"bash_commands\",\n      \"directory_listing\",\n      \"pattern_searching\",\n      \"multi_tool_coordination\"\n    ],\n    \"test_data\": {\n      \"users\": [\n        {\"id\": 1, \"name\": \"Alice\", \"role\": \"developer\"},\n        {\"id\": 2, \"name\": \"Bob\", \"role\": \"tester\"}\n      ],\n      \"metrics\": {\n        \"files_created\": 2,\n        \"commands_executed\": 3,\n        \"tools_used\": 5\n      }\n    },\n    \"timestamp\": \"2025-08-07T00:00:00Z\"\n  }\n}"
 }
 
 ❓ Allow this tool? (y/n/a=allow all): 

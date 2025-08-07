@@ -1,0 +1,18 @@
+🚀 Claude Code SDK - Quick Demo with Hooks
+========================================
+
+📤 Prompt: Create a simple test file called "demo-test.txt" with the message "Hello from Claude Code SDK with hooks!" and then list the directory contents.
+
+📥 Response received
+📥 Response received
+
+🔧 Auto-allowing tool: Write
+📥 Response received
+📥 Response received
+
+🎯 QUICK DEMO COMPLETE!
+⏱️  Duration: 15912ms
+💰 Cost: $0.03848805
+✅ Success: true
+
+🎵 Completion sound should play now (Stop hook)
