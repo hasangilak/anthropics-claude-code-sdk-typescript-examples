@@ -1,0 +1,82 @@
+🚀 Claude Code SDK - Complete Feature Demo
+==================================================
+This demo will showcase:
+✅ TypeScript SDK Integration
+✅ Real-time Streaming JSON Communication
+✅ Interactive Permission System
+✅ Multiple Tool Usage
+✅ Hooks Integration (completion sound)
+✅ File Operations
+✅ Error Handling
+==================================================
+
+📤 Demo Prompt:
+Please demonstrate multiple Claude Code capabilities:
+
+1. Create a demo directory called "sdk-demo"
+2. Create a JSON file with some sample data
+3. List the current directory contents
+4. Search for any files containing "demo" 
+5. Create a summary file with what you accomplished
+
+This will test Write, Bash, LS, Grep, and multiple tool coordination with permission system.
+
+==================================================
+🔧 System initialized with tools and hooks
+📥 Claude Response:
+---
+I'll demonstrate multiple Claude Code capabilities by creating a demo directory, JSON file, and performing various file operations. Let me start by creating a todo list to track this task.
+---
+
+📥 Claude Response:
+---
+🔧 Using tool: TodoWrite
+---
+
+📥 Claude Response:
+---
+Now let me start with the first task - creating the demo directory:
+---
+
+📥 Claude Response:
+---
+🔧 Using tool: TodoWrite
+---
+
+📥 Claude Response:
+---
+🔧 Using tool: Bash
+---
+
+
+🔧 Tool Request: Bash
+   Parameters: {
+  "command": "mkdir sdk-demo",
+  "description": "Create sdk-demo directory"
+}
+
+❓ Allow this tool? (y/n/a=allow all): 🔓 Auto-allowing all future tools...
+✅ Permission granted: Bash
+📥 Claude Response:
+---
+🔧 Using tool: TodoWrite
+---
+
+📥 Claude Response:
+---
+Now creating a JSON file with sample data:
+---
+
+📥 Claude Response:
+---
+🔧 Using tool: Write
+---
+
+
+🔧 Tool Request: Write
+   Parameters: {
+  "file_path": "/home/hassan/anthropic-sdk/sdk-demo/sample-data.json",
+  "content": "{\n  \"users\": [\n    {\n      \"id\": 1,\n      \"name\": \"Alice Johnson\",\n      \"email\": \"alice@example.com\",\n      \"role\": \"admin\",\n      \"active\": true\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Bob Smith\",\n      \"email\": \"bob@example.com\",\n      \"role\": \"user\",\n      \"active\": true\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Charlie Brown\",\n      \"email\": \"charlie@example.com\",\n      \"role\": \"user\",\n      \"active\": false\n    }\n  ],\n  \"settings\": {\n    \"theme\": \"dark\",\n    \"notifications\": true,\n    \"maxUsers\": 100\n  },\n  \"version\": \"1.0.0\",\n  \"lastUpdated\": \"2025-08-07T10:30:00Z\"\n}"
+}
+
+❓ Allow this tool? (y/n/a=allow all): 

@@ -1,0 +1,1 @@
+Success! File created via Claude Code SDK with TypeScript and proper permission handling.
