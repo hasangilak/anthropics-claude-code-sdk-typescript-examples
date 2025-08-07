@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__grep__searchGitHub",
+      "WebFetch(domain:claudelog.com)"
+    ],
+    "deny": []
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ffplay -nodisp -autoexit /home/user/path/done.mp3"
+          }
+        ]
+      }
+    ]
+  }
+}
