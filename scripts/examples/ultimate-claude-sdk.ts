@@ -37,12 +37,14 @@
  * 
  * Direct Commands:
  * - `bun run ultimate-claude-sdk.ts query "your prompt"`
+ * - `bun run ultimate-claude-sdk.ts query "your prompt" --permission-mode plan`
  * - `bun run ultimate-claude-sdk.ts test` (run test suite)
  * - `bun run ultimate-claude-sdk.ts demo` (quick demonstration)
  * - `bun run ultimate-claude-sdk.ts stats` (show statistics)
  * 
  * 📋 INTERACTIVE COMMANDS:
- * - query [prompt] - Run ultimate query with all features
+ * - query [prompt] - Run ultimate query with enhanced permissions
+ * - query-with-mode [mode] [prompt] - Run with specific permission mode
  * - test - Execute comprehensive test suite
  * - stats - Show detailed usage statistics
  * - clear - Reset all data and start fresh
@@ -209,10 +211,33 @@ class UltimatePermissionSystem {
           ]
         };
 
+      case 'ExitPlanMode':
+        const plan = parameters.plan as string;
+        return {
+          ...baseInfo,
+          riskLevel: 'MEDIUM',
+          explanation: `Exit planning mode and proceed with task execution`,
+          impacts: [
+            `🎯 Action: Switch from planning to execution mode`,
+            `📋 Plan summary: ${plan ? plan.substring(0, 200) + (plan.length > 200 ? '...' : '') : 'No plan provided'}`,
+            `⚡ Next step: Claude will begin implementing the planned actions`,
+            `🔄 Mode change: From "plan" to active execution`,
+            `📊 Usage count: ${this.toolUsageStats.get(toolName)} times`,
+            `⚠️  Warning: Actual file/system changes will begin after approval`
+          ],
+          recommendations: [
+            '📋 Review the proposed plan carefully',
+            '🤔 Consider if the plan addresses your requirements',
+            '⚠️  Once approved, Claude will start making actual changes',
+            '🛑 This is your last checkpoint before execution begins',
+            '💡 You can deny to request plan modifications'
+          ]
+        };
+
       // MCP Tools Detection
       default:
         const isMCP = toolName.includes('mcp_') || toolName.includes('@') || 
-                     !['Write', 'Read', 'Edit', 'Bash', 'LS', 'Grep', 'WebFetch', 'TodoWrite', 'MultiEdit', 'Glob', 'NotebookEdit', 'WebSearch'].includes(toolName);
+                     !['Write', 'Read', 'Edit', 'Bash', 'LS', 'Grep', 'WebFetch', 'TodoWrite', 'MultiEdit', 'Glob', 'NotebookEdit', 'WebSearch', 'ExitPlanMode'].includes(toolName);
         
         if (isMCP) {
           return {
@@ -245,7 +270,8 @@ class UltimatePermissionSystem {
           'Grep': { risk: 'LOW', desc: 'Search files', impacts: ['🔍 Matching content visible'] },
           'WebFetch': { risk: 'MEDIUM', desc: 'Fetch web content', impacts: ['🌐 HTTP request to external server'] },
           'TodoWrite': { risk: 'LOW', desc: 'Update todos', impacts: ['📝 Task tracking only'] },
-          'Glob': { risk: 'LOW', desc: 'Find files by pattern', impacts: ['📁 File paths revealed'] }
+          'Glob': { risk: 'LOW', desc: 'Find files by pattern', impacts: ['📁 File paths revealed'] },
+          'ExitPlanMode': { risk: 'HIGH', desc: 'Exit planning mode and proceed with execution', impacts: ['🎯 Switch from planning to execution mode', '⚡ Begin actual task implementation'] }
         };
 
         const toolInfo = standardTools[toolName] || { risk: 'MEDIUM', desc: 'Unknown tool', impacts: ['❓ Unknown capabilities'] };
@@ -270,6 +296,40 @@ class UltimatePermissionSystem {
       case 'HIGH': return '🟠';
       case 'CRITICAL': return '🔴';
       default: return '⚪';
+    }
+  }
+
+  private showPlanPreview(plan: string): void {
+    console.log('\n📋 PLAN PREVIEW:');
+    console.log('─'.repeat(60));
+    
+    const lines = plan.split('\n');
+    const previewLines = lines.slice(0, 15); // Show more lines for plans
+    const hasMore = lines.length > 15;
+    
+    previewLines.forEach((line, index) => {
+      const lineNum = (index + 1).toString().padStart(2);
+      const truncated = line.length > 120 ? line.substring(0, 120) + '...' : line;
+      console.log(`${lineNum}: ${truncated}`);
+    });
+    
+    if (hasMore) {
+      console.log(`   ... and ${lines.length - 15} more lines`);
+    }
+    
+    console.log('─'.repeat(60));
+    console.log(`📏 Total length: ${plan.length} characters across ${lines.length} lines`);
+    
+    // Analyze plan complexity
+    const bulletPoints = (plan.match(/^\s*[-*•]\s/gm) || []).length;
+    const numberedItems = (plan.match(/^\s*\d+\.\s/gm) || []).length;
+    const codeBlocks = (plan.match(/```/g) || []).length / 2;
+    
+    if (bulletPoints > 0 || numberedItems > 0 || codeBlocks > 0) {
+      console.log('\n📊 PLAN ANALYSIS:');
+      if (bulletPoints > 0) console.log(`   • Bullet points: ${bulletPoints}`);
+      if (numberedItems > 0) console.log(`   • Numbered steps: ${numberedItems}`);
+      if (codeBlocks > 0) console.log(`   • Code examples: ${Math.floor(codeBlocks)}`);
     }
   }
 
@@ -340,9 +400,11 @@ class UltimatePermissionSystem {
     console.log('\n💡 SECURITY RECOMMENDATIONS:');
     toolInfo.recommendations.forEach(rec => console.log(`   ${rec}`));
     
-    // Show enhanced content preview for file operations
+    // Show enhanced content preview for file operations and plan mode
     if (['Write', 'Edit', 'MultiEdit'].includes(toolName)) {
       this.showContentPreview(parameters);
+    } else if (toolName === 'ExitPlanMode' && parameters.plan) {
+      this.showPlanPreview(parameters.plan as string);
     }
 
     // Show parameter analysis
@@ -622,12 +684,13 @@ class UltimateClaudeSDK {
       sessionId?: string;
       mcpServers?: Record<string, any>;
       testMode?: boolean;
+      permissionMode?: 'default' | 'acceptEdits' | 'bypassPermissions' | 'plan';
     } = {}
   ) {
     console.log('🚀 ULTIMATE CLAUDE CODE SDK');
     console.log('='.repeat(60));
     console.log('✨ Features Active:');
-    console.log('   🔒 Enhanced permission system with risk analysis');
+    console.log(`   🔒 Permission system: ${options.permissionMode || 'Enhanced interactive mode'}`);
     console.log('   🧠 Context preservation and session management');
     console.log('   🔌 MCP integration with security warnings');
     console.log('   📊 Complete usage tracking and statistics');
@@ -663,17 +726,26 @@ class UltimateClaudeSDK {
         await conversationComplete;
       }
 
-      // Configure ultimate SDK options
+      // Configure ultimate SDK options  
       const sdkOptions: any = {
-        maxTurns: options.maxTurns || 8,
+        maxTurns: options.maxTurns || (options.permissionMode === 'plan' ? 15 : 8),
         mcpServers: options.mcpServers || {},
-        canUseTool: async (toolName: string, parameters: Record<string, any>) => {
-          if (!toolsUsed.includes(toolName)) {
-            toolsUsed.push(toolName);
-          }
-          
+        permissionMode: options.permissionMode
+      };
+
+      // Always add canUseTool for tracking, but conditionally apply permissions
+      sdkOptions.canUseTool = async (toolName: string, parameters: Record<string, any>) => {
+        if (!toolsUsed.includes(toolName)) {
+          toolsUsed.push(toolName);
+        }
+        
+        // Only apply our custom permission system for default mode
+        if (!options.permissionMode || options.permissionMode === 'default' || options.permissionMode === 'plan') {
           return await this.permissionSystem.getUserPermission(toolName, parameters);
         }
+        
+        // For other permission modes, just allow (SDK handles the mode logic)
+        return { behavior: 'allow', updatedInput: parameters };
       };
 
       // Apply context strategy
@@ -691,6 +763,7 @@ class UltimateClaudeSDK {
       console.log('\n📤 Ultimate query initiated...');
       console.log(`   🎯 Max turns: ${sdkOptions.maxTurns}`);
       console.log(`   🔌 MCP servers: ${Object.keys(sdkOptions.mcpServers || {}).length}`);
+      console.log(`   🛡️  Permission mode: ${sdkOptions.permissionMode || 'Enhanced interactive'}`);
       console.log(`   📝 Prompt: ${prompt.substring(0, 100)}${prompt.length > 100 ? '...' : ''}`);
       console.log('\n' + '='.repeat(60));
 
@@ -888,7 +961,7 @@ class UltimateClaudeSDK {
 
   async interactiveMode() {
     console.log('🎮 ULTIMATE INTERACTIVE MODE');
-    console.log('Commands: query, test, stats, clear, help, exit');
+    console.log('Commands: query, query-with-mode, test, stats, clear, help, exit');
     console.log('='.repeat(50));
     
     const rl = createInterface({
@@ -914,6 +987,23 @@ class UltimateClaudeSDK {
             await this.runUltimateQuery(prompt);
             break;
             
+          case 'query-with-mode':
+          case 'qm':
+            if (args.length < 2) {
+              console.log('❌ Usage: query-with-mode <mode> <prompt>');
+              console.log('   Modes: default, acceptEdits, bypassPermissions, plan');
+              break;
+            }
+            const mode = args[0];
+            const queryPrompt = args.slice(1).join(' ');
+            if (['default', 'acceptEdits', 'bypassPermissions', 'plan'].includes(mode)) {
+              await this.runUltimateQuery(queryPrompt, { permissionMode: mode as any });
+            } else {
+              console.log(`❌ Invalid permission mode: ${mode}`);
+              console.log('   Valid modes: default, acceptEdits, bypassPermissions, plan');
+            }
+            break;
+            
           case 'test':
           case 't':
             await this.runTestSuite();
@@ -932,7 +1022,9 @@ class UltimateClaudeSDK {
           case 'help':
           case 'h':
             console.log('\n📋 ULTIMATE COMMANDS:');
-            console.log('   query [prompt] - Run ultimate query');
+            console.log('   query [prompt] - Run ultimate query with enhanced permissions');
+            console.log('   query-with-mode <mode> <prompt> - Run query with specific permission mode');
+            console.log('     Modes: default|acceptEdits|bypassPermissions|plan');
             console.log('   test - Run comprehensive test suite');
             console.log('   stats - Show detailed statistics');
             console.log('   clear - Clear all data and reset');
@@ -993,6 +1085,16 @@ async function main() {
             queryOptions.contextStrategy = 'resume';
             queryOptions.sessionId = queryArgs[i + 1];
             i++; // skip next arg as it's the session ID
+          } else if (queryArgs[i] === '--permission-mode' && i + 1 < queryArgs.length) {
+            const mode = queryArgs[i + 1];
+            if (['default', 'acceptEdits', 'bypassPermissions', 'plan'].includes(mode)) {
+              queryOptions.permissionMode = mode;
+            } else {
+              console.log(`❌ Invalid permission mode: ${mode}`);
+              console.log('   Valid modes: default, acceptEdits, bypassPermissions, plan');
+              process.exit(1);
+            }
+            i++; // skip next arg as it's the permission mode
           } else if (!queryArgs[i].startsWith('--')) {
             queryPrompt += (queryPrompt ? ' ' : '') + queryArgs[i];
           }
@@ -1001,8 +1103,13 @@ async function main() {
         if (!queryPrompt) {
           console.log('❌ Usage: bun run ultimate-claude-sdk.ts query "your prompt here"');
           console.log('   Options:');
-          console.log('     --continue          Continue from last session');
-          console.log('     --session <id>      Resume specific session');
+          console.log('     --continue                Continue from last session');
+          console.log('     --session <id>            Resume specific session');
+          console.log('     --permission-mode <mode>  Set permission mode:');
+          console.log('                               • default - Use enhanced interactive permissions');
+          console.log('                               • acceptEdits - Auto-accept edit operations');
+          console.log('                               • bypassPermissions - Allow all tools');
+          console.log('                               • plan - Plan mode (Claude explains before acting)');
           process.exit(1);
         }
         
@@ -1040,8 +1147,9 @@ async function main() {
       default:
         console.log('❓ Unknown command. Available commands:');
         console.log('   query "prompt" - Run single query');
-        console.log('     --continue          Continue from last session');
-        console.log('     --session <id>      Resume specific session');
+        console.log('     --continue                Continue from last session');
+        console.log('     --session <id>            Resume specific session');
+        console.log('     --permission-mode <mode>  Set permission mode (default|acceptEdits|bypassPermissions|plan)');
         console.log('   test - Run test suite');
         console.log('   demo - Run demonstration');
         console.log('   stats - Show statistics');
